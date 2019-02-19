@@ -4,6 +4,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by nizy on 2018/12/17.
@@ -19,6 +21,7 @@ public class RedisDistributedLock {
     public RedisDistributedLock(JedisPool jedispool) {
         this.jedisPool = jedispool;
         this.jedis = jedispool.getResource();
+
     }
 
     /**
