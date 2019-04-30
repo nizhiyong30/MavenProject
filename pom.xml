@@ -19,6 +19,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <zkClientVersion>0.1</zkClientVersion>
+        <zkVersion>3.5.4-beta</zkVersion>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>redis.clients</groupId>
@@ -48,7 +54,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>14.0</version>
+            <version>27.0.1-jre</version>
         </dependency>
 
         <dependency>
@@ -63,6 +69,50 @@
             <version>4.12</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>${zkClientVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>${zkVersion}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.android</groupId>-->
+            <!--<artifactId>jsonlube-annotations</artifactId>-->
+            <!--<version>1.0.0.3</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.android</groupId>-->
+            <!--<artifactId>jsonlube</artifactId>-->
+            <!--<version>1.0.0.3</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 </project>
