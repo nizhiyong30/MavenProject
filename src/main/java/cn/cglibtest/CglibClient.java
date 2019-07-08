@@ -1,6 +1,7 @@
 package cn.cglibtest;
 
 import net.sf.cglib.proxy.Enhancer;
+import sun.misc.ProxyGenerator;
 
 public class CglibClient {
     public static void main(String[] args) {
