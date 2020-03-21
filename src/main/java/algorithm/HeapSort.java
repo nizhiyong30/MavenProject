@@ -47,10 +47,25 @@ public class HeapSort {
         }
     }
 
+    public static void topnK(int[] array, int k) {
+        int length = array.length;
+        for (int i = length / 2 - 1; i >= 0; i--) {
+            heapAdjust(array, i, length);
+        }
+        for (int i = 1; i <= k; i++) {
+            int temp = array[array.length - i];
+            array[array.length - i] = array[0];
+            System.out.println(array[0]);
+            array[0] = temp;
+            heapAdjust(array, 0, array.length - i);
+        }
+    }
+
     public static void main(String[] args) {
         int[] array = CommonUtils.generateRandomArray(10);
         CommonUtils.printArray(array);
-        heapSort(array);
+        System.out.println();
+        topnK(array, 5);
         System.out.println();
         CommonUtils.printArray(array);
     }

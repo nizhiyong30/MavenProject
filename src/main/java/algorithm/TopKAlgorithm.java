@@ -27,10 +27,10 @@ public class TopKAlgorithm {
         int[] array = CommonUtils.generateRandomArray(10);
         CommonUtils.printArray(array);
         System.out.println();
-        topKMaxValue(array, 5);
-        System.out.println();
-        HeapSort.heapSort(array);
-        CommonUtils.printArray(array);
+//        System.out.println();
+//        topKMaxValue(array, 5);
+//        System.out.println();
+        HeapSort.topnK(array, 5);
 
     }
 }
