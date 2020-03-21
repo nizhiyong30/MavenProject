@@ -1,10 +1,13 @@
 package cn.java8.stream;
 
 import com.google.common.collect.Lists;
+import lombok.Synchronized;
 import org.apache.commons.lang3.builder.ToStringExclude;
+import org.jboss.netty.channel.socket.http.HttpTunnelingServlet;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
@@ -16,6 +19,8 @@ import java.util.stream.Stream;
  */
 
 public class StreamTest {
+
+    ReentrantLock lock = new ReentrantLock();
 
     @Test
     public void filter() {
@@ -138,40 +143,51 @@ public class StreamTest {
 
     @Test
     public void ReduceDTest() {
-        ArrayList<Integer> accResult_ = Stream.of(2, 3, 4)
+        ArrayList<Integer> accResult_ = Stream.of(2, 3, 4, 5, 6)
                 .parallel().reduce(Lists.newArrayList(1),
                         (acc, item) -> {
-//                            System.out.println("acc+ : " + acc);
+//                            lock.lock();
+//                            long id = Thread.currentThread().getId();
+//                            System.out.println("id:" + id +  ",acc before+ : " + acc);
+//                            System.out.println("id:" + id +  ",item: " + item);
                             acc.add(item);
-//                            System.out.println("item: " + item);
-//                            System.out.println("acc+ : " + acc);
-//                            System.out.println("BiFunction");
+//                            System.out.println("id:" + id +  ",acc after+ : " + acc);
+//                            lock.unlock();
                             return acc;
                         }, (acc, item) -> {
-//                            System.out.println("BinaryOperator");
-//                            System.out.println("item: " + item);
-//                            System.out.println("acc+ : " + acc);
+                            System.out.println("BinaryOperator");
+                            System.out.println("item: " + item);
+                            System.out.println("acc+ : " + acc);
                             acc.addAll(item);
-//                            System.out.println("item: " + item);
-//                            System.out.println("acc+ : " + acc);
-//                            System.out.println("--------");
+                            System.out.println("item: " + item);
+                            System.out.println("acc+ : " + acc);
+                            System.out.println("--------");
                             return acc;
                         }
                 );
         System.out.println("accResult_: " + accResult_);
+        System.out.println(accResult_.size());
+
     }
 
     @Test
     public void ReduceETest() {
         int accResult_ = Stream.of(2, 3, 4)
-                .parallel().reduce(0,
+                .parallel().reduce(1,
                         (acc, item) -> {
-                            System.out.println(acc);
-                            System.out.println(item);
-                            System.out.println("-------");
+//                            System.out.println(acc);
+//                            System.out.println(item);
+//                            System.out.println("-------");
                             return acc + item;
                         }
-                        , (acc, item) -> acc + item
+                        , (acc, item) -> {
+                            System.out.println(acc);
+                            System.out.println(item);
+                            int result = acc + item;
+                            System.out.println(acc);
+                            System.out.println(item);
+                            return result;
+                        }
                 );
         System.out.println("accResult_: " + accResult_);
     }
