@@ -2,6 +2,9 @@ package algorithm.dp;
 
 import algorithm.util.CommonUtils;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * @author kelai 2020-05-30 18:25
  */
@@ -59,6 +62,7 @@ public class LonggestIncreadeSubSeq {
         System.out.println();
         int[] result = getLIS(array);
         CommonUtils.printArray(result);
+        Queue<Integer> queue = new LinkedBlockingQueue<>();
 
     }
 }
