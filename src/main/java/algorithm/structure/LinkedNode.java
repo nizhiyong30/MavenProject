@@ -2,7 +2,6 @@ package algorithm.structure;
 
 public class LinkedNode {
     private Node head;
-
     public LinkedNode(Node head) {
         this.head = head;
     }
