@@ -23,7 +23,7 @@ public class BagProblem {
             for (int j = 1; j < capacity + 1; j++) {
                 dp[i][j] = dp[i - 1][j];
                 if (w[i] <= j) {
-                    dp[i][j] = Math.max(dp[i - 1][j - w[i]] +  + v[i], dp[i - 1][j - 0]);
+                    dp[i][j] = Math.max(dp[i - 1][j - w[i]] + v[i], dp[i - 1][j]);
                 }
             }
         }

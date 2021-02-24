@@ -17,7 +17,7 @@ public class MyNioClient {
     private final static int BUF_SIZE = 10240;
     private static ByteBuffer byteBuffer = ByteBuffer.allocate(BUF_SIZE);
 
-    private void  initClient() throws IOException {
+    private void initClient() throws IOException {
         this.selector = Selector.open();
         SocketChannel clientChannel = SocketChannel.open();
         clientChannel.configureBlocking(false);

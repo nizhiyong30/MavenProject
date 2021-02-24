@@ -171,7 +171,7 @@ public class StreamTest {
     }
 
     @Test
-    public void ReduceETest() {
+    public void ReduceTest() {
         int accResult_ = Stream.of(2, 3, 4)
                 .parallel().reduce(1,
                         (acc, item) -> {
@@ -190,6 +190,19 @@ public class StreamTest {
                         }
                 );
         System.out.println("accResult_: " + accResult_);
+    }
+
+    @Test
+    public void maxTest() {
+        List<Student> studentList = new ArrayList<>();
+        for (int i = 1; i < 11; i ++) {
+            Student student = new Student(i, "student-" + 1, "male", 173.0F);
+            studentList.add(student);
+        }
+        Student finalStudent = studentList.stream()
+                .max(Comparator.comparing(student -> student.no))
+                .get();
+        System.out.println(finalStudent);
     }
 
     class Student {

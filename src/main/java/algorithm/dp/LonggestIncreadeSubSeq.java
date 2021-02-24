@@ -11,24 +11,35 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class LonggestIncreadeSubSeq {
 
 
-    public static int[] getDP(int [] array) {
+    /**
+     * 最长递增子序列, leetcode第300题。程序员代码面试指南第202页。
+     * dp[i]表示以array[i]为结尾时，最长序列的长度。dp[i]=max{dp[j]+1(0<=j<i,arr[j]<arr[i])}
+     * 从arr[j,j=(0..i-1)]中选择比arr[i]小且dp[j]最大的数。
+     * @param array
+     * @return
+     */
+    public static int getDP(int[] array) {
         if (array == null || array.length == 0) {
-            return null;
+            return 0;
         }
-        int dp [] = new int[array.length];
-        for (int i = 0; i < array.length; i++) {
+        int[] dp = new int[array.length];
+        dp[0] = 1;
+        int maxLength = 1;
+        for (int i = 1; i < array.length; i++) {
+            int value = array[i];
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (array[j] < array[i]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                if (array[j] < value) {
+                   dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
+            maxLength = Math.max(dp[i], maxLength);
         }
-        return dp;
+        return maxLength;
     }
 
     public static int[] getLIS(int[] array) {
-        int dp[] = getDP(array);
+        int dp[] = null;
         // 最长递增子序列最后一个数字在原数组的下标
         int index = 0;
         //最长递增子序列长度
@@ -41,7 +52,7 @@ public class LonggestIncreadeSubSeq {
         }
 
         int lis[] = new int[maxLength];
-        lis[maxLength-1] = array[index];
+        lis[maxLength - 1] = array[index];
         int value = array[index];
         for (int i = index; i >= 0; i--) {
             int curValue = array[i];
@@ -57,7 +68,8 @@ public class LonggestIncreadeSubSeq {
     }
 
     public static void main(String[] args) {
-        int[] array = {2,1,5,3,6,4,8,9,7};
+        int[] array = {2, 1, 5, 3, 6, 4, 8, 9, 7};
+        getDP(array);
         CommonUtils.printArray(array);
         System.out.println();
         int[] result = getLIS(array);

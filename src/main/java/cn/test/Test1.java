@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -31,33 +29,14 @@ import java.util.regex.Pattern;
  */
 @Slf4j
 public class Test1 {
+    static CountDownLatch countDownLatch = new CountDownLatch(2);
 
     public static void main(String[] args) {
-        ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
-//        threadLocal.set(null);
-        System.out.println(threadLocal.get());
-        System.out.println(threadLocal.get());
-        Executors.newCachedThreadPool();
+        int memberAgency = 0;
+        int memberBrand = 1;
+        System.out.println(memberAgency << 1 | memberBrand);
+
     }
+}
 
-        @Test
-        public void test () {
-            int i = 0;
-            try {
-                if (i > -1) {
-                    return;
-                }
-            } catch (Exception e) {
 
-            } finally {
-                System.out.println(1);
-            }
-
-        }
-
-        public static void listTest (List list){
-            for (Object obj : list) {
-                System.out.print(obj + " ");
-            }
-        }
-    }
