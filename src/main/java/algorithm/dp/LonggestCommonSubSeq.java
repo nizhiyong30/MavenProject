@@ -2,7 +2,11 @@ package algorithm.dp;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+
 /**
+ * 最长公共序列，
+ *
  * @author kelai 2020-05-30 22:15
  */
 public class LonggestCommonSubSeq {
@@ -20,11 +24,37 @@ public class LonggestCommonSubSeq {
         }
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
-                dp[i][j] = Math.max(Math.max(dp[i - 1][j], dp[i][j - 1]), (s1.charAt(i) == s2.charAt(j) ? dp[i-1][j-1] + 1 : 0));
+                dp[i][j] = Math.max(Math.max(dp[i - 1][j], dp[i][j - 1]), (s1.charAt(i) == s2.charAt(j) ? dp[i - 1][j - 1] + 1 : 0));
             }
         }
         return dp;
     }
+
+    public static int getDP1(String s1, String s2) {
+        int m = s1.length();
+        int n = s2.length();
+        String moreString = m >= n ? s1 : s2;
+        String lessString = m < n ? s1 : s2;
+        int less = Math.min(m, n);
+        int more = Math.max(m, n);
+        int[] dp = new int[less + 1];
+        for (int i = 1; i <= more; i++) {
+            // pre代表二维数组中的dp[i-1][j-1]
+            // 对于j+1来讲，就是更新前的dp[j];
+            int pre = 0;
+            for (int j = 1; j <= less; j++) {
+                int tmp = dp[j];
+                if (moreString.charAt(i - 1) == lessString.charAt(j - 1)) {
+                    dp[j] = pre + 1;
+                } else {
+                    dp[j] = Math.max(dp[j - 1], dp[j]);
+                }
+                pre = tmp;
+            }
+        }
+        return dp[less];
+    }
+
 
     public static String lcss(String s1, String s2) {
         if (StringUtils.isEmpty(s1) || StringUtils.isEmpty(s2)) {
@@ -50,9 +80,11 @@ public class LonggestCommonSubSeq {
         return s.toString();
     }
 
+
+
     public static void main(String[] args) {
-        String s1 = "1a2c3d4b56";
-        String s2 = "b1d23ca45b6a";
-        System.out.println(lcss(s1, s2));
+        String s1 = "abcba";
+        String s2 = "abcbcba";
+        System.out.println(getDP1(s1, s2));
     }
 }
