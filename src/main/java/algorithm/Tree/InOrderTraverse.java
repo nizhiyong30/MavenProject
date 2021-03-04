@@ -2,6 +2,8 @@ package algorithm.Tree;
 
 import algorithm.structure.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -18,18 +20,19 @@ public class InOrderTraverse {
         inOrderTraverseRecursive(treeNode.getRight());
     }
 
-    public static void inOrderTraverse(TreeNode treeNode) {
+    public static void inOrderTraverse(TreeNode root) {
+        TreeNode current = root;
+        List<Integer> result = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        stack.add(treeNode);
-        while(!stack.isEmpty()) {
-            TreeNode head = stack.peek();
-            while(head.getLeft() != null) {
-                stack.push(head.getLeft());
+        while(!stack.empty() || current != null) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
             }
-            head = stack.pop();
-            System.out.println(head);
-            if (head.getRight() != null) {
-                stack.push(head.getRight());
+            if(!stack.empty()) {
+                TreeNode node = stack.pop();
+                result.add((Integer) node.val);
+                current = node.right;
             }
         }
     }
