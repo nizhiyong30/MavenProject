@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * leetcode第120题——最小三角盒和
+ * leetcode第120题——最小三角形和
+ * https://leetcode-cn.com/problems/triangle/
  * 用二维矩阵dp[i][j]处理。注意边界条件d[][0]和dp[n][n]的处理。
  * @author nizy
  * @date 2021/2/21 11:02 下午
