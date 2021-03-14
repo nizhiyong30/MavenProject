@@ -29,7 +29,7 @@ public class TopN {
             nums.add(tmp);
             Heap.adjust(nums);
             Heap.heapSort(nums);
-            while((line = bw.readLine()) != null){
+            while ((line = bw.readLine()) != null) {
                 tmp = Integer.parseInt(line);
                 if (nums.size() < 50) {
                     Heap.insert(nums, tmp);
@@ -48,7 +48,7 @@ public class TopN {
         return nums;
     }
 
-    public static class ThreadRuning extends Thread{
+    public static class ThreadRuning extends Thread {
 
         private String filename;
 
@@ -57,16 +57,17 @@ public class TopN {
         private CopyOnWriteArrayList<Integer> tmpList;
 
 
-        public ThreadRuning(String name, String filename, CountDownLatch countDownLatch, CopyOnWriteArrayList<Integer> tmpList){
+        public ThreadRuning(String name, String filename, CountDownLatch countDownLatch, CopyOnWriteArrayList<Integer> tmpList) {
             super(name);
             this.filename = filename;
             this.countDownLatch = countDownLatch;
             this.tmpList = tmpList;
         }
+
         @Override
         public void run() {
             try {
-                List<Integer> tmp = readTop50("path"+filename+".txt");
+                List<Integer> tmp = readTop50("path" + filename + ".txt");
                 for (int i = 1; i < tmp.size(); i++) {
                     tmpList.add(tmp.get(i));
                 }
@@ -89,7 +90,7 @@ public class TopN {
                 Thread coutThread = new ThreadRuning(String.valueOf(i), String.valueOf(i), countDownLatch, list);
                 coutThread.start();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
