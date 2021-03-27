@@ -15,6 +15,6 @@ public class concurrent {
 
 
     public static void main(String[] args) throws InterruptedException{
-        StringBuffer
+
     }
 }
