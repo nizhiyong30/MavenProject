@@ -40,5 +40,6 @@ public class Combine {
 
     public static void main(String[] args) {
         System.out.println(solution(4, 2));
+        ArrayList<Integer> arrayList = new ArrayList<>();
     }
 }

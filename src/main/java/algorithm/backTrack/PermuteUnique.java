@@ -4,7 +4,7 @@ import java.beans.Visibility;
 import java.util.*;
 
 /**
- * 全排列er
+ * 全排列
  * https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/
  * @author nizy
  * @date 2021/3/1 11:09 下午
