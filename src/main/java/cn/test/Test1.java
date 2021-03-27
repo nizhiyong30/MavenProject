@@ -14,13 +14,12 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicStampedReference;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,10 +31,9 @@ public class Test1 {
     static CountDownLatch countDownLatch = new CountDownLatch(2);
 
     public static void main(String[] args) {
-        int memberAgency = 0;
-        int memberBrand = 1;
-        System.out.println(memberAgency << 1 | memberBrand);
-
+        ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+        reentrantReadWriteLock.writeLock().lock();
+        reentrantReadWriteLock.readLock().lock();
     }
 }
 

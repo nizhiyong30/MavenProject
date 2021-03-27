@@ -12,9 +12,63 @@ public class MyClassLoaderParentFirst extends ClassLoader{
 
     private Map<String, String> classPathMap = new HashMap<>();
 
-    public MyClassLoaderParentFirst() {
-        classPathMap.put("com.java.loader.TestA", "/Users/nizhiyong/private/Study/code/MavenProject/target/classes/cn/classLoader/TestA.class");
-        classPathMap.put("com.java.loader.TestB", "/Users/nizhiyong/private/Study/code/MavenProject/target/classes/cn/classLoader/TestB.class");
+    ClassLoader jdkClassLoader = null;
+
+    public MyClassLoaderParentFirst(ClassLoader jdkClassLoader) {
+        this.jdkClassLoader = jdkClassLoader;
+        classPathMap.put("cn.classLoader.TestA", "/Users/nizhiyong/private/classes/TestA.class");
+        classPathMap.put("cn.classLoader.TestB", "/Users/nizhiyong/private/classes/TestB.class");
+    }
+
+//    @Override
+//    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+//        Class result = null;
+//        String classPath = classPathMap.get(name);
+//        if (classPath != null) {
+//            File file = new File(classPath);
+//            if (!file.exists()) {
+//                throw new ClassNotFoundException();
+//            }
+//
+//            byte[] classBytes = getClassData(file);
+//            if (classBytes == null || classBytes.length == 0) {
+//                throw new ClassNotFoundException();
+//            }
+//            return defineClass(classBytes, 0, classBytes.length);
+//        } else {
+//            try {
+//                //这里要使用 JDK 的类加载器加载 java.lang 包里面的类
+//                result = jdkClassLoader.loadClass(name);
+//            } catch (Exception e) {
+//                //忽略
+//            }
+//            return result;
+//        }
+//    }
+
+    @Override
+    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+        Class result = null;
+        try {
+            //这里要使用 JDK 的类加载器加载 java.lang 包里面的类
+            result = jdkClassLoader.loadClass(name);
+        } catch (Exception e) {
+            //忽略
+        }
+        if (result != null) {
+            return result;
+        }
+        String classPath = classPathMap.get(name);
+        File file = new File(classPath);
+        if (!file.exists()) {
+            throw new ClassNotFoundException();
+        }
+
+        byte[] classBytes = getClassData(file);
+        if (classBytes == null || classBytes.length == 0) {
+            throw new ClassNotFoundException();
+        }
+        return defineClass(classBytes, 0, classBytes.length);
     }
 
     // 重写了 findClass 方法
