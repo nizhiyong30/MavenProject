@@ -69,6 +69,28 @@ public class LonggestIncreadeSubSeq {
 
     }
 
+    /**
+     * 维护一个列表 tailstails，其中每个元素 tails[k]tails[k] 的值代表 长度为 k+1k+1 的子序列尾部元素的值。
+     *
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS(int[] nums) {
+        int[] tails = new int[nums.length];
+        int res = 0;
+        for(int num : nums) {
+            int i = 0, j = res;
+            while(i < j) {
+                int m = (i + j) / 2;
+                if(tails[m] < num) i = m + 1;
+                else j = m;
+            }
+            tails[i] = num;
+            if(res == j) res++;
+        }
+        return res;
+    }
+
 
     public static int[] LISWithSmallest(int[] arr) {
         // write code here

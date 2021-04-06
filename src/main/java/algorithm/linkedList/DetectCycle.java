@@ -2,6 +2,8 @@ package algorithm.linkedList;
 
 import algorithm.structure.ListNode;
 
+import java.util.Queue;
+
 /**
  * https://leetcode-cn.com/problems/linked-list-cycle-ii/
  * 首先找到环中的一个节点，通过该节点，计算环的长度length。
