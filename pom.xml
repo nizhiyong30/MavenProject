@@ -22,7 +22,7 @@
 
     <properties>
         <zkClientVersion>0.1</zkClientVersion>
-        <zkVersion>3.5.4-beta</zkVersion>
+        <zkVersion>3.5.5</zkVersion>
         <lunece.version>8.8.2</lunece.version>
 
     </properties>
