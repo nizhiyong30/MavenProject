@@ -27,7 +27,6 @@ public class ZKDistributedLock {
     }
 
     public static void main(String[] args) {
-        ZKDistributedLock zkDistributedLock = new ZKDistributedLock();
-        zkDistributedLock.connect();
+
     }
 }

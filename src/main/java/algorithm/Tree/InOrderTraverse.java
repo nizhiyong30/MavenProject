@@ -36,4 +36,7 @@ public class InOrderTraverse {
             }
         }
     }
+
+    public static void main(String[] args) {
+    }
 }

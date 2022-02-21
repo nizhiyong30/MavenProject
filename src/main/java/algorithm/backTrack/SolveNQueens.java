@@ -38,8 +38,7 @@ public class SolveNQueens {
                     String ns = s.substring(0, i) + 'Q' + s.substring(i + 1, s.length());
                     current.set(row, ns);
                     find(row + 1, n, current);
-                    current.set(row, s);
-                    ;
+                    current.set(row, s);;
                 }
             }
         }
@@ -61,7 +60,7 @@ public class SolveNQueens {
             }
         }
 
-        //
+        //右上角
         for (int i = row, j = col; i >= 0 && j < n; i--, j++) {
             if (current.get(i).charAt(j) == 'Q') {
                 return false;

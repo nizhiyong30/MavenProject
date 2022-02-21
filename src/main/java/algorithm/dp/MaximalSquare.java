@@ -6,20 +6,17 @@ package algorithm.dp;
  */
 public class MaximalSquare {
     public static int solution(char[][] matrix) {
+        int result = 0;
         int[][] dp = new int[matrix.length][matrix[0].length];
-        dp[0][0] = matrix[0][0] == '1' ? 1 : 0;
-        int result = dp[0][0];
-        for(int i = 1; i < matrix[0].length; i++) {
-            dp[0][i] = matrix[0][i] == '1' ? 1 : 0;
-            result = Math.max(result, dp[0][i]);
-        }
-        for(int i = 1; i < matrix.length; i++) {
-            dp[i][0] = matrix[i][0] == '1' ? 1 : 0;
-            result = Math.max(result, dp[i][0]);
-        }
-        for (int i = 1; i <  matrix.length; i++) {
-            for (int j = 1; j < matrix[0].length; j++) {
-                dp[i][j] = Math.min(dp[i-1][j-1], Math.min(dp[i-1][j], dp[i][j-1])) + matrix[i][j] - '0';
+        for (int i = 0; i <  matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if(matrix[i][j] == '1') {
+                    if(i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(dp[i-1][j-1], Math.min(dp[i-1][j], dp[i][j-1])) + 1;
+                    }
+                }
                 result = Math.max(dp[i][j], result);
             }
         }
@@ -38,7 +35,13 @@ public class MaximalSquare {
      * @param args
      */
     public static void main(String[] args) {
-        char[][] array = {{'1','1','1','1','0'},{'1','1','1','1','0'},{'1','1','1','1','1'},{'1','1','1','1','1'},{'0','0','1','1','1'}};
-        System.out.println(solution(array));
+        int[] nums = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+        int result = -2;
+        int num = -2;
+        for(int i = 1; i < nums.length; i++) {
+            num = Math.max(num + nums[i], nums[i]);
+            result = Math.max(num, result);
+        }
+        System.out.println(result);
     }
 }

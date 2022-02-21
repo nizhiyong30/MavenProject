@@ -2,6 +2,8 @@ package algorithm.array;
 
 import algorithm.array.sort.QuickSort;
 
+import java.util.PriorityQueue;
+
 /**
  * https://leetcode-cn.com/problems/kth-largest-element-in-an-array/comments/
  *
@@ -12,6 +14,7 @@ public class FindKthLargest {
 
     public int quickSort(int[] nums, int start, int end, int k) {
         int index = partition(nums, start, end);
+        PriorityQueue<Integer> priority = new PriorityQueue<>(k, (a, b) -> b.compareTo(a));
         if (index == k) {
             return nums[index];
         }
@@ -47,8 +50,8 @@ public class FindKthLargest {
     }
 
     public static void main(String[] args) {
-        int[] nums = {2, 1};
+        int[] nums = {0,0,1,2,4,2,2,3,1,4};
         FindKthLargest quickSort = new FindKthLargest();
-        System.out.println(quickSort.findKthLargest(nums, 2));
+        System.out.println(quickSort.findKthLargest(nums, 5));
     }
 }

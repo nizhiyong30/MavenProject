@@ -70,77 +70,61 @@ public class LonggestIncreadeSubSeq {
     }
 
     /**
-     * 维护一个列表 tailstails，其中每个元素 tails[k]tails[k] 的值代表 长度为 k+1k+1 的子序列尾部元素的值。
+     * 维护一个列表 ，其中每个元素 end[k]的值代表长度为k的子序列尾部元素的值。
+     * 对于nums[i],从找出第一个大于nums[i]的end[k]的下标index,并将end[index]更新为nums[i]
+     * dp[i]表示以array[i]为结尾时的最长递增子序列序列的长度。
      *
      * @param nums
      * @return
      */
-    public int lengthOfLIS(int[] nums) {
-        int[] tails = new int[nums.length];
-        int res = 0;
-        for(int num : nums) {
-            int i = 0, j = res;
-            while(i < j) {
-                int m = (i + j) / 2;
-                if(tails[m] < num) i = m + 1;
-                else j = m;
-            }
-            tails[i] = num;
-            if(res == j) res++;
+    public static int lengthOfLIS(int[] nums) {
+        int len = 1, n = nums.length;
+        if (n == 0) {
+            return 0;
         }
-        return res;
-    }
-
-
-    public static int[] LISWithSmallest(int[] arr) {
-        // write code here
-        int dp[] = new int[arr.length];
-        // index[i]表示最长递增子序列的长度为i时，符合条件的最长递增子序列最后一个字符最小的字符所在的下标。
-        int index[] = new int[arr.length];
-        int lastIndex = -1;
-        Arrays.fill(dp, 1);
-        Arrays.fill(index, -1);
-        index[0] = 0;
-        for (int i = 1; i < arr.length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (arr[j] < arr[i]) {
-                    if (dp[j] + 1 > dp[i]) {
-                        dp[i] = dp[j] + 1;
+        int[] end = new int[n + 1];
+        int[] dp = new int[n];
+        end[len] = nums[0];
+        dp[0] = 1;
+        for (int i = 1; i < n; ++i) {
+            if (nums[i] > end[len]) {
+                end[++len] = nums[i];
+                dp[i] = len;
+            } else {
+                int l = 1, r = len;
+                while (l <= r) {
+                    int mid = (l + r) >> 1;
+                    if (nums[i] > end[mid]) {
+                        l = mid + 1;
+                    } else if (nums[i] == end[mid]) {
+                        r = mid - 1;
+                    } else if (nums[i] < end[mid]) {
+                        r = mid - 1;
                     }
                 }
-            }
-            if (index[dp[i]] == -1) {
-                index[dp[i]] = i;
-            } else {
-                index[dp[i]] = arr[i] > arr[index[dp[i]]] ? index[dp[i]] : i;
-            }
-        }
-        for (int j = index.length - 1; j >= 0; j--) {
-            if (index[j] != -1) {
-                lastIndex = index[j];
-                break;
+                //
+                if (end[l] > nums[i]) {
+                    end[l] = nums[i];
+                }
+                dp[i] = l;
+                len = l;
             }
         }
-        int[] result = new int[dp[lastIndex]];
-        int resultIndex = result.length - 1;
+        int[] resultArray = getLIS(end, len);
+        return len;
+    }
 
-        result[resultIndex--] = arr[lastIndex];
-        int subSequenceLength = dp[lastIndex] - 1;
-        for (int i = lastIndex - 1; i >= 0; i--) {
-            if (subSequenceLength == 0) {
-                break;
-            }
-            if (dp[i] == subSequenceLength) {
-                result[resultIndex--] = arr[i];
-                subSequenceLength--;
-            }
+    public static int[] getLIS(int[] end, int maxLength) {
+        int[] result = new int[maxLength];
+        for (int i = maxLength; i > 0; i--) {
+            result[i - 1] = end[i];
         }
         return result;
     }
 
     public static void main(String[] args) {
-        int[] array = {2,1,5,3,6,4,8,9,7};
-        System.out.println(LISWithSmallest(array));
+        int[] array = {2, 1, 5, 3, 6, 4, 8, 9, 7};
+        System.out.println(lengthOfLIS(array));
 //        CommonUtils.printArray(array);
 //        System.out.println();
 //        int[] result = getLIS(array);

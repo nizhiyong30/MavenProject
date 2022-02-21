@@ -59,7 +59,7 @@ public class BuildTree {
             }
             index++;
         }
-        int leftNum = index - preOrderStart;
+        int leftNum = index - inorderStart;
         node.left = buildTree1(preorder, inorder, preOrderStart + 1, preOrderStart + leftNum, inorderStart, index - 1);
         node.right = buildTree1(preorder, inorder, preOrderStart + 1 + leftNum, preOrderEnd, index + 1, inorderEnd);
         return node;
