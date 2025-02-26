@@ -3,7 +3,6 @@ package cn.java8.stream;
 import com.google.common.collect.Lists;
 import lombok.Synchronized;
 import org.apache.commons.lang3.builder.ToStringExclude;
-import org.jboss.netty.channel.socket.http.HttpTunnelingServlet;
 import org.junit.Test;
 
 import java.util.*;

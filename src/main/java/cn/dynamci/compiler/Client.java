@@ -13,7 +13,8 @@ import java.util.List;
 public class Client {
 
     static String SOURCE_CODE =
-            "package cn.dynamci.compiler;\n" +
+            "package cn.dynamci.compiler1;\n" +
+                    "import cn.dynamci.compiler.HelloService;" +
                     "public class JdkDynamicCompileHelloService implements HelloService{\n" +
             "\n" +
             "    @Override\n" +
@@ -33,11 +34,11 @@ public class Client {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         // 设置编译参数
         List<String> options = new ArrayList<>();
-        options.add("-d");
-
-        options.add("/Users/nizhiyong/private/Study/code/MavenProject/target/classes/cn/dynamci/compiler");
-//        options.add("-source");
-//        options.add("1.8");
+//        options.add("-d");
+//
+//        options.add("/Users/nizhiyong/private/Study/code/MavenProject/target/classes/cn/dynamci/compiler");
+        options.add("-source");
+        options.add("1.8");
 //        options.add("-target");
 //        options.add("1.8");
         // 获取标准的Java文件管理器实例
@@ -46,7 +47,7 @@ public class Client {
         JdkDynamicCompileClassLoader classLoader = new JdkDynamicCompileClassLoader(Thread.currentThread().getContextClassLoader());
         // 初始化自定义Java文件管理器实例
         JdkDynamicCompileJavaFileManager fileManager = new JdkDynamicCompileJavaFileManager(manager, classLoader);
-        String packageName = "cn.dynamci.compiler";
+        String packageName = "cn.dynamci.compiler1";
         String className = "JdkDynamicCompileHelloService";
         String qualifiedName = packageName + "." + className;
         // 构建Java源文件实例

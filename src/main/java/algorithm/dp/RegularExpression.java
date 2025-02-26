@@ -47,6 +47,6 @@ public class RegularExpression {
     }
     public static void main(String[] args) {
         RegularExpression regularExpression = new RegularExpression();
-        System.out.println(regularExpression.isMatch("aa", "a*"));
+        System.out.println(regularExpression.isMatch("aa", ".*"));
     }
 }

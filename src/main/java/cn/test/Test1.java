@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
@@ -30,10 +31,14 @@ import java.util.regex.Pattern;
 public class Test1 {
     static CountDownLatch countDownLatch = new CountDownLatch(2);
 
+    private static Map<String, String> cache = new HashMap<>();
+    private static ReentrantLock reentrantLock = new ReentrantLock();
+    private static Condition condition = reentrantLock.newCondition();
+    private static String key;
+
     public static void main(String[] args) {
-        ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
-        reentrantReadWriteLock.writeLock().lock();
-        reentrantReadWriteLock.readLock().lock();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("s", "s");
     }
 }
 

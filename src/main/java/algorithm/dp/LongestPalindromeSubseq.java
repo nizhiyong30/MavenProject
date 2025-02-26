@@ -42,6 +42,7 @@ public class LongestPalindromeSubseq {
      * p[i][j]表示字符串s从第i个到第j个的子串是否构成回文
      * dp[i][j] = s.charAt(i) == s.charAt(j) ?  dp[i+][j-1] : false
      * 由于dpp[i][j]依赖于dp[i+1][j-1]，因此要从dp[s.length-1][0..s.length-1]开始更新dp数组
+     *
      * @param s
      * @return
      */
@@ -58,20 +59,20 @@ public class LongestPalindromeSubseq {
         int maxLength = 1;
         for (int i = s.length() - 1; i >= 0; i--) {
             for (int j = i + 1; j < s.length(); j++) {
-                if(s.charAt(i) == s.charAt(j)) {
+                if (s.charAt(i) == s.charAt(j)) {
                     if (j - i < 2) {
                         dp[i][j] = true;
                     } else {
-                        dp[i][j] = dp[i+1][j-1];
+                        dp[i][j] = dp[i + 1][j - 1];
                     }
-                    if(dp[i][j]) {
-                        if(j - i + 1 > maxLength) {
+                    if (dp[i][j]) {
+                        if (j - i + 1 > maxLength) {
                             left = i;
                             right = j;
                             maxLength = j - i + 1;
                         }
                     }
-               }
+                }
             }
         }
         return s.substring(left, right + 1);
@@ -79,7 +80,12 @@ public class LongestPalindromeSubseq {
 
 
     public static void main(String[] args) {
-        String s = "aaaa";
-        System.out.println(solution1(s));
+        StringBuilder result = new StringBuilder();
+        String s = result.append("1").append(";").append("2").toString();
+        for (String ss : s.split(";")) {
+            if (s != "") {
+                System.out.println(ss);
+            }
+        }
     }
 }
