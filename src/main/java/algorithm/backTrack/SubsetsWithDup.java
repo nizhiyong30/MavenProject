@@ -35,6 +35,8 @@ public class SubsetsWithDup {
             return;
         }
         for (int i = index; i < nums.length; i++) {
+            // 当i-1被访问过，说明选择nums[i]是合理的选择，例如{1,1}是合理的选择；
+            // 若i-1未必选择过，而nums[i]=nums[i-1]，当前位置为nums[i]的组合已被选择过，所以不能再选择。
             if ((i > 0 && nums[i] == nums[i - 1] && !visit[i - 1])) {
                 continue;
             }
@@ -48,7 +50,7 @@ public class SubsetsWithDup {
 
     public static void main(String[] args) {
         SubsetsWithDup subsetsWithDup = new SubsetsWithDup();
-        int[] nums = {1, 2, 2};
+        int[] nums = {1, 1, 2};
         System.out.println(subsetsWithDup.subsetsWithDup(nums));
     }
 }

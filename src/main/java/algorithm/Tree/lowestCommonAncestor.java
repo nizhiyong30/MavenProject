@@ -2,6 +2,10 @@ package algorithm.Tree;
 
 import algorithm.structure.TreeNode;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 最近公共祖先
  * https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/

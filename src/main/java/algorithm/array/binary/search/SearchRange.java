@@ -71,8 +71,8 @@ public class SearchRange {
 
     public static void main(String[] args) {
         SearchRange searchRange = new SearchRange();
-        int nums[] = {1, 2, 3, 5, 6, 7};
-        int[] result = searchRange.searchRange(nums, 4);
+        int nums[] = {5,7,7,8,8,10};
+        int[] result = searchRange.searchRange(nums, 8);
         System.out.println(result[0] + "," + result[1]);
     }
 }

@@ -14,7 +14,7 @@ public class ReverseList {
         }
         ListNode node = reverseList(head.next);
         head.next.next = head;
-        node.next = null;
+        head.next = null;
         return node;
     }
 }

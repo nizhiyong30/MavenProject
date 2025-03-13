@@ -8,7 +8,11 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.xerial.snappy.Snappy;
+import sun.nio.ch.DirectBuffer;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -23,22 +27,25 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by nizy on 2019/4/16.
  */
 @Slf4j
 public class Test1 {
-    static CountDownLatch countDownLatch = new CountDownLatch(2);
 
-    private static Map<String, String> cache = new HashMap<>();
-    private static ReentrantLock reentrantLock = new ReentrantLock();
-    private static Condition condition = reentrantLock.newCondition();
-    private static String key;
 
-    public static void main(String[] args) {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("s", "s");
+    public static void main(String[] args) throws Exception {
+       List<List<String>> list = new ArrayList<>();
+       for(int i = 0; i < 5; i++) {
+           List<String> innerList = new ArrayList<>();
+           innerList.add(i + "");
+           innerList.add(i + "" + i);
+           list.add(innerList);
+       }
+       List result = list.stream().flatMap(Collection::stream).collect(Collectors.toList());
+       System.out.println(result);
     }
 }
 

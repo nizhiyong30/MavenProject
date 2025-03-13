@@ -31,7 +31,7 @@ public class GenerateParenthesis {
     public void generate(int left, int right, StringBuilder current) {
         if (left == 0 && right == 0) {
             result.add(current.toString());
-        } else if (right > 0 && left >= 0) {
+        } else if (right >= 0 && left >= 0) {
             if (left == right) {
                 current.append("(");
                 generate(left - 1, right, current);
@@ -59,7 +59,7 @@ public class GenerateParenthesis {
     public void generate2(int left, int right, LinkedList<String> current) {
         if (left == 0 && right == 0) {
             result.add(getString(current));
-        } else if (right > 0 && left >= 0) {
+        } else if (right >= 0 && left >= 0) {
             if (left == right) {
                 current.addLast("(");
                 generate2(left - 1, right, current);

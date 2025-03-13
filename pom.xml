@@ -23,7 +23,7 @@
     <properties>
         <zkClientVersion>0.1</zkClientVersion>
         <zkVersion>3.5.4-beta</zkVersion>
-        <lunece.version>7.1.0</lunece.version>
+        <lunece.version>8.8.2</lunece.version>
 
     </properties>
 
@@ -110,40 +110,60 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.6</version>
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>${lunece.version}</version>
-        </dependency>
-        <!-- Lucene的查询解析器 -->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queryparser</artifactId>
-            <version>${lunece.version}</version>
-        </dependency>
-        <!-- lucene的默认分词器库 -->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>${lunece.version}</version>
-        </dependency>
-        <!-- lucene的高亮显示 -->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-highlighter</artifactId>
-            <version>${lunece.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-core</artifactId>-->
+<!--            <version>${lunece.version}</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Lucene的查询解析器 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-queryparser</artifactId>-->
+<!--            <version>${lunece.version}</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; lucene的默认分词器库 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-analyzers-common</artifactId>-->
+<!--            <version>${lunece.version}</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; lucene的高亮显示 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-highlighter</artifactId>-->
+<!--            <version>${lunece.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.janeluo</groupId>
             <artifactId>ikanalyzer</artifactId>
             <version>2012_u6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>lucene-analyzers-common</artifactId>
+                    <groupId>org.apache.lucene</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>lucene-core</artifactId>
+                    <groupId>org.apache.lucene</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>lucene-queryparser</artifactId>
+                    <groupId>org.apache.lucene</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -199,18 +219,35 @@
             <version>3.3.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.dxy</groupId>
+            <artifactId>search-clinic-custom</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.13.4</version>
+        </dependency>
 
 
         <!--<dependency>-->
-            <!--<groupId>com.alibaba.android</groupId>-->
-            <!--<artifactId>jsonlube-annotations</artifactId>-->
-            <!--<version>1.0.0.3</version>-->
+        <!--<groupId>com.alibaba.android</groupId>-->
+        <!--<artifactId>jsonlube-annotations</artifactId>-->
+        <!--<version>1.0.0.3</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>com.alibaba.android</groupId>-->
-            <!--<artifactId>jsonlube</artifactId>-->
-            <!--<version>1.0.0.3</version>-->
+        <!--<groupId>com.alibaba.android</groupId>-->
+        <!--<artifactId>jsonlube</artifactId>-->
+        <!--<version>1.0.0.3</version>-->
         <!--</dependency>-->
 
         <dependency>

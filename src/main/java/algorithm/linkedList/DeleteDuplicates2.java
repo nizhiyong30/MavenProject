@@ -38,6 +38,21 @@ public class DeleteDuplicates2 {
         return head;
     }
 
+    public ListNode deleteDuplicates2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        if (head.val != head.next.val) {
+            head.next = deleteDuplicates2(head.next);
+            return head;
+        } else {
+            while(head != null && head.next.val != null && head.val == head.next.val){
+                head = head.next;
+            }
+            return deleteDuplicates(head.next);
+        }
+    }
+
     public static void main(String[] args) {
         DeleteDuplicates2 deleteDuplicates2 = new DeleteDuplicates2();
         ListNode root = new ListNode(1);
