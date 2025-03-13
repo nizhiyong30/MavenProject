@@ -13,7 +13,7 @@ public class StackToQueue<E> {
         if (!outStack.isEmpty()) {
             return outStack.pop();
         } else if (!inStack.isEmpty()) {
-            while (!inStack.isEmpty()) {
+            while (!inStack.isEmpty())  {
                 outStack.push(inStack.pop());
             }
             return outStack.pop();
